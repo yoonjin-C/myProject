@@ -3,21 +3,12 @@
 body {
   position: relative;
   font-family: "NeoDunggeunmo";
+  margin: 0;
 }
 
-.back {
-  background-color: black;
-}
 .main {
-  display: flex;
-  flex-direction: column;
   display: grid;
   grid-template-rows: 1fr 1fr;
-  background-color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
-
   width: 450px;
   height: 650px;
   z-index: 10;
@@ -43,11 +34,24 @@ body {
   line-height: 1em;
   padding-left: 10px;
 }
+.bar {
+  height: 325px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.computerbox {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 30px;
+}
+.userbox {
+  display: flex;
+  justify-content: flex-end;
+}
 #computer {
   width: 200px;
   height: 60px;
-  position: relative;
-  top: 20px;
   background-image: url("images/comp-info2.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -63,9 +67,6 @@ body {
 #user {
   width: 220px;
   height: 80px;
-  position: absolute;
-  top: 140px;
-  right: 0px;
   background-image: url("images/user-info.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -77,11 +78,6 @@ body {
   left: 40px;
 }
 #msg {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-
   height: 65px;
   padding: 10px;
   background-image: url("images/IMG_4435.jpg");

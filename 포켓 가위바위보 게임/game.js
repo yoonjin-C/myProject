@@ -21,7 +21,6 @@ function getComChoice() {
   return choiceArray[comChoice];
 }
 
-function compareChoice() {}
 //승리
 function win() {
   console.log("승리");
@@ -101,9 +100,10 @@ reset.onclick = () => {
       "패";
   }, 1500);
 };
-rock.onclick = () => {
-  const infomsg = document.getElementById("msg");
-  msg.innerText = "퍼비는 바위를 냈다!";
+
+//가위,바위,보 입력받은 후 액션
+function handleButtonClick(userChoice) {
+  msg.innerText = `퍼비는 ${userChoice}를 냈다!`;
   const comChoice = getComChoice();
 
   switch (comChoice) {
@@ -111,84 +111,29 @@ rock.onclick = () => {
       setTimeout(() => {
         msg.innerText = "컴퓨터는 바위를 냈다!";
       }, 1000);
-      draw();
+      if (userChoice === "바위") draw();
+      else if (userChoice === "가위") lose();
+      else if (userChoice === "보") win();
       break;
     case "s":
       setTimeout(() => {
         msg.innerText = "컴퓨터는 가위를 냈다!";
       }, 1000);
-      win();
+      if (userChoice === "바위") win();
+      else if (userChoice === "가위") draw();
+      else if (userChoice === "보") lose();
       break;
     case "p":
       setTimeout(() => {
         msg.innerText = "컴퓨터는 보를 냈다!";
       }, 1000);
-      lose();
+      if (userChoice === "바위") lose();
+      else if (userChoice === "가위") win();
+      else if (userChoice === "보") draw();
       break;
   }
-};
-
-scissors.onclick = () => {
-  const infomsg = document.getElementById("msg");
-  msg.innerText = "퍼비는 가위를 냈다!";
-  const comChoice = getComChoice();
-
-  switch (comChoice) {
-    case "r":
-      setTimeout(() => {
-        msg.innerText = "컴퓨터는 바위를 냈다!";
-      }, 1000);
-      lose();
-      break;
-    case "s":
-      setTimeout(() => {
-        msg.innerText = "컴퓨터는 가위를 냈다!";
-      }, 1000);
-      draw();
-      break;
-    case "p":
-      setTimeout(() => {
-        msg.innerText = "컴퓨터는 보를 냈다!";
-      }, 1000);
-      win();
-      break;
-  }
-};
-
-paper.onclick = () => {
-  const infomsg = document.getElementById("msg");
-  msg.innerText = "퍼비는 보를 냈다!";
-  const comChoice = getComChoice();
-
-  switch (comChoice) {
-    case "r":
-      setTimeout(() => {
-        msg.innerText = "컴퓨터는 바위를 냈다!";
-      }, 1000);
-      win();
-      break;
-    case "s":
-      setTimeout(() => {
-        msg.innerText = "컴퓨터는 가위를 냈다!";
-      }, 1000);
-      lose();
-      break;
-    case "p":
-      setTimeout(() => {
-        msg.innerText = "컴퓨터는 보를 냈다!";
-      }, 1000);
-      draw();
-      break;
-  }
-};
-
-//버튼의 입력 구분
-/*
-function main() {
-  rock.addEventListener("click", () => gameR());
-  scissors.addEventListener("click", () => gameS());
-  paper.addEventListener("click", () => gameP());
-  reset.addEventListener("click", () => setReset());
 }
 
-main();*/
+rock.onclick = () => handleButtonClick("바위");
+scissors.onclick = () => handleButtonClick("가위");
+paper.onclick = () => handleButtonClick("보");
