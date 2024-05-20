@@ -84,7 +84,7 @@ const ModalButton = styled.button`
   margin: 5px;
 `;
 
-function Tweet({ tweetId, writer, content, postDate, onDelete }) {
+function Tweet({ tweetId, writer, content, postDate, onDelete, accountId }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDeleteClick = () => {
@@ -92,7 +92,7 @@ function Tweet({ tweetId, writer, content, postDate, onDelete }) {
   };
 
   const handleDeleteConfirm = () => {
-    onDelete(tweetId);
+    onDelete(tweetId, accountId);
     setIsModalOpen(false);
   };
 
@@ -114,10 +114,10 @@ function Tweet({ tweetId, writer, content, postDate, onDelete }) {
       {isModalOpen && (
         <ModalOverlay>
           <ModalContent>
-            <p>정말 삭제하시겠습니까?</p>
+            <p>Delete Post?</p>
             <div>
-              <ModalButton onClick={handleDeleteConfirm}>삭제</ModalButton>
-              <ModalButton onClick={handleCancel}>취소</ModalButton>
+              <ModalButton onClick={handleDeleteConfirm}>Delete</ModalButton>
+              <ModalButton onClick={handleCancel}>Cancel</ModalButton>
             </div>
           </ModalContent>
         </ModalOverlay>
@@ -132,6 +132,7 @@ Tweet.propTypes = {
   content: PropTypes.string.isRequired,
   postDate: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
+  accountId: PropTypes.string.isRequired,
 };
 
 export default Tweet;
