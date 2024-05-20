@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 
 const ProfileContainer = styled.div`
   display: block;
-  /* flex-direction: column; */
   flex-grow: 1;
   max-width: 600px;
   width: 100%;
@@ -25,13 +24,14 @@ const UserInfoBlock = styled.div`
   flex-direction: column;
   margin-left: 20px;
 `;
+
 const MainProfile = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
   const accountId = 1; // 임시 계정 ID
 
   useEffect(() => {
-    //API 이용시
+    // API 이용시
     // axios
     //   .get(`/accounts/${accountId}`)
     //   .then((response) => {
@@ -43,7 +43,7 @@ const MainProfile = () => {
     //     );
     //   });
 
-    const user = mockData.users.find((item) => item.accountId === accountId); //임시로 mockData사용. 삭제예정
+    const user = mockData.users.find((item) => item.accountId === accountId); // 임시로 mockData 사용. 삭제 예정
     if (user) {
       setUserData(user);
     } else {
@@ -55,25 +55,28 @@ const MainProfile = () => {
     <ProfileContainer>
       {userData ? <ProfileHeader userData={userData} /> : <p>Loading...</p>}
       {error && <p>{error.message}</p>}
-      <UserInfoBlock>
-        <h4>{userData.name}</h4>
-        <p>{userData.nickname}</p>
-        <p>{userData.email}</p>
-        <p>{new Date(userData.joinDate).toLocaleString()}</p>
-      </UserInfoBlock>
+      {userData && (
+        <UserInfoBlock>
+          <h4>{userData.name}</h4>
+          <p>{userData.nickname}</p>
+          <p>{userData.email}</p>
+          <p>{userData.bio}</p>
+          <p>{new Date(userData.joinDate).toLocaleString()}</p>
+        </UserInfoBlock>
+      )}
     </ProfileContainer>
   );
+};
 
-  MainProfile.propTypes = {
-    userData: PropTypes.shape({
-      accountId: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      nickname: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      bio: PropTypes.string,
-      joinDate: PropTypes.string.isRequired,
-    }).isRequired,
-  };
+MainProfile.propTypes = {
+  userData: PropTypes.shape({
+    accountId: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    nickname: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    bio: PropTypes.string,
+    joinDate: PropTypes.string.isRequired,
+  }),
 };
 
 export default MainProfile;
