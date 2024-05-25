@@ -1,0 +1,32 @@
+{
+  "tweets": [
+    {
+      "tweetId": 1,
+      "writer": "@fubi",
+      "content": "내용1",
+      "postDate": "2024-04-18T08:02:21.347+0000"
+    },
+    {
+      "tweetId": 2,
+      "writer": "@fubi2",
+      "content": "내용2",
+      "postDate": "2024-04-19T08:02:21.347+0000"
+    },
+    {
+      "tweetId": 3,
+      "writer": "@fubi3",
+      "content": "내용3",
+      "postDate": "2024-04-20T08:02:21.347+0000"
+    }
+  ],
+  "users": [
+    {
+      "accountId": 1,
+      "name": "yjChoi",
+      "nickname": "@yj1205",
+      "email": "efub11@naver.com",
+      "bio": "hello!",
+      "joinDate": "2024-01-01T08:02:21.347+0000"
+    }
+  ]
+}
