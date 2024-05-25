@@ -1,23 +1,21 @@
 import "./App.css";
 import MainPage from "./pages/MainPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-
+import Feed from "./components/Feed";
+import TweetDetail from "./components/Feed/TweetDetail";
+import ProfilePage from "./pages/ProfilePage";
 function App() {
   return (
     <>
       <body>
-        <div className="main">
-          <MainPage />
-        </div>
+        <Router>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/tweets/:tweetId" element={<TweetDetail />} />
+          </Routes>
+        </Router>
       </body>
-      <Router>
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-      </Router>
     </>
   );
 }

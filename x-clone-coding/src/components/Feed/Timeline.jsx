@@ -16,7 +16,7 @@ const ErrorMessage = styled.div`
   font-weight: bold;
 `;
 
-function Timeline({ tweets, error, onDelete }) {
+function Timeline({ tweets, error, onDelete, accountId }) {
   //   const [tweets, setTweets] = useState([]);
   //   const [error, setError] = useState(null);
 
@@ -38,6 +38,7 @@ function Timeline({ tweets, error, onDelete }) {
         <Tweet
           key={tweet.tweetId}
           tweetId={tweet.tweetId}
+          accountId={accountId}
           writer={tweet.writer}
           content={tweet.content}
           postDate={new Date(tweet.postDate).toLocaleString()}

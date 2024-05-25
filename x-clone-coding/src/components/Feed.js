@@ -4,6 +4,7 @@ import FeedHeader from "./Feed/FeedHeader";
 import CreatePost from "./Feed/CreatePost";
 import Timeline from "./Feed/Timeline";
 import axios from "axios";
+import mockData from "../mockData.json";
 
 const FeedContainer = styled.div`
   display: block;
@@ -22,27 +23,51 @@ const FeedContainer = styled.div`
 const Feed = () => {
   const [tweets, setTweets] = useState([]);
   const [error, setError] = useState(null);
+  const accountId = "yjChoi"; //현재 사용자 ID
 
   useEffect(() => {
-    axios
-      .get("/tweets")
-      .then((response) => {
-        setTweets(response.data.tweets);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
+    //API 연결
+    // axios
+    //   .get("/tweets")
+    //   .then((response) => {
+    //     setTweets(response.data.tweets);
+    //   })
+    //   .catch((error) => {
+    //     setError(error.message);
+    //   });
+
+    setTweets(mockData.tweets); //임시로 mockData사용. 삭제예정
   }, []);
 
   const addTweet = (newTweet) => {
     setTweets([newTweet, ...tweets]);
   };
-
+  const deleteTweet = (tweetId, accountId) => {
+    axios
+      .delete(`/tweets/${tweetId}?accountId=${accountId}`)
+      .then(() => {
+        setTweets(tweets.filter((tweet) => tweet.tweetId !== tweetId));
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 403) {
+          alert("삭제 권한이 없는 사용자입니다.");
+        } else {
+          console.error("Failed to delete tweet:", error);
+          alert("Failed to delete the tweet.");
+        }
+      });
+  };
   return (
     <FeedContainer>
       <FeedHeader />
       <CreatePost addTweet={addTweet} />
-      <Timeline tweets={tweets} error={error} />
+      <Timeline
+        tweets={tweets}
+        setTweets={setTweets}
+        error={error}
+        onDelete={deleteTweet}
+        accountId={accountId}
+      />
     </FeedContainer>
   );
 };

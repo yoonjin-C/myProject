@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import Profile from "./Profile";
 import { RiHome7Fill } from "react-icons/ri";
 import { BiSearch } from "react-icons/bi";
 import { GoBell } from "react-icons/go";
@@ -72,13 +71,17 @@ const Header = () => {
     <HeaderContainer>
       <Nav>
         <NavItem>
-          <NavItemLogo href="/home"> 𝕏 </NavItemLogo>
+          <Link to={`/`}>
+            <NavItemLogo> 𝕏 </NavItemLogo>
+          </Link>
         </NavItem>
-        <NavItem href="/home">
+        <NavItem>
           <NavItemLogo>
             <RiHome7Fill />
           </NavItemLogo>
-          <NavItemText>Home</NavItemText>
+          <Link to={`/`}>
+            <NavItemText>Home</NavItemText>
+          </Link>
         </NavItem>
         <NavItem>
           <NavItemLogo>
@@ -98,11 +101,13 @@ const Header = () => {
           </NavItemLogo>
           <NavItemText>Messages</NavItemText>
         </NavItem>
-        <NavItem href="/profile">
+        <NavItem>
           <NavItemLogo>
             <FaRegUser />
           </NavItemLogo>
-          <NavItemText>Profile</NavItemText>
+          <Link to={`/profile`}>
+            <NavItemText>Profile</NavItemText>
+          </Link>
         </NavItem>
         <NavItem>
           <NavItemLogo>

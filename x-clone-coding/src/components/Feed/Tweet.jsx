@@ -1,19 +1,32 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const TweetBlock = styled.div`
   display: flex;
+  width: 600px;
   flex-direction: column;
-  align-items: center;
-  padding: 15px 5px 0px;
+  align-items: flex-start;
+  //padding: 15px 5px 0px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  justify-content: center;
+`;
+const TweetBlock2 = styled.div`
+  display: flex;
+  width: 600px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px;
 `;
 
 const TweetInfo = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  //justify-content: flex-start;
+  height: 20px;
+  justify-content: space-between;
 `;
 
 const Writer = styled.div`
@@ -29,12 +42,15 @@ const PostDate = styled.div`
   font-size: 15px;
   white-space: nowrap;
   align-items: center;
+  margin-left: 20px;
 `;
 
 const ContentBlock = styled.div`
+  width: 600px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  text-decoration: none;
 `;
 
 const Text = styled.p`
@@ -43,6 +59,7 @@ const Text = styled.p`
   line-height: 20px;
   font-size: 15px;
   font-weight: 400;
+  text-decoration: none;
 `;
 
 const DeleteBtn = styled.button`
@@ -50,13 +67,7 @@ const DeleteBtn = styled.button`
   border: none;
   cursor: pointer;
   font-size: 15px;
-`;
-
-const Poster = styled.img`
-  border-radius: 5px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  width: 250px;
-  height: 390px;
+  color: white;
 `;
 
 const ModalOverlay = styled.div`
@@ -72,7 +83,7 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background: white;
+  background: black;
   padding: 20px;
   border-radius: 5px;
   display: flex;
@@ -102,26 +113,30 @@ function Tweet({ tweetId, writer, content, postDate, onDelete, accountId }) {
 
   return (
     <TweetBlock>
-      <TweetInfo>
-        <Writer>{writer}</Writer>
-        <PostDate>{postDate}</PostDate>
-        <DeleteBtn onClick={handleDeleteClick}>x</DeleteBtn>
-      </TweetInfo>
-      <ContentBlock>
-        <Text>{content}</Text>
-        {/* 사진이 들어온다면 여기 */}
-      </ContentBlock>
-      {isModalOpen && (
-        <ModalOverlay>
-          <ModalContent>
-            <p>Delete Post?</p>
-            <div>
-              <ModalButton onClick={handleDeleteConfirm}>Delete</ModalButton>
-              <ModalButton onClick={handleCancel}>Cancel</ModalButton>
-            </div>
-          </ModalContent>
-        </ModalOverlay>
-      )}
+      <TweetBlock2>
+        <TweetInfo>
+          <Writer>{writer}</Writer>
+          <PostDate>{postDate}</PostDate>
+          <DeleteBtn onClick={handleDeleteClick}>x</DeleteBtn>
+        </TweetInfo>
+        <ContentBlock>
+          <Link to={`/tweets/${tweetId}`}>
+            <Text>{content}</Text>
+            {/* 사진이 들어온다면 여기 */}
+          </Link>
+        </ContentBlock>
+        {isModalOpen && (
+          <ModalOverlay>
+            <ModalContent>
+              <p>Delete Post?</p>
+              <div>
+                <ModalButton onClick={handleDeleteConfirm}>Delete</ModalButton>
+                <ModalButton onClick={handleCancel}>Cancel</ModalButton>
+              </div>
+            </ModalContent>
+          </ModalOverlay>
+        )}
+      </TweetBlock2>
     </TweetBlock>
   );
 }

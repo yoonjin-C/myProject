@@ -9,7 +9,7 @@ import { HiOutlineGif } from "react-icons/hi2";
 import { AiOutlinePicture } from "react-icons/ai";
 // import PostOptionButton from './post_option_button';
 // import CreatePostModal from '../../post/create_post_modal';
-import CreatePostModal from "./CreatePostModal";
+// import CreatePostModal from "./CreatePostModal";
 
 const Container = styled.div`
   width: 100%;
@@ -124,7 +124,7 @@ export default function CreatePost({ addTweet }) {
     setUploading(true);
     try {
       const response = await axios.post("/tweets", {
-        accountId: 1, // 유저 아이디 수정 필요
+        accountId: "yjChoi", // 유저 아이디 수정 필요
         content: value,
       });
       setUploading(false);
