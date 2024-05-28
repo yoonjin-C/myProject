@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import mockData from "../mockData.json";
 import ProfileHeader from "./ProfileHeader";
 import PropTypes from "prop-types";
 
@@ -28,27 +27,21 @@ const UserInfoBlock = styled.div`
 const MainProfile = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
-  const accountId = 1; // 임시 계정 ID
+  const accountId = "1"; // 임시 계정 ID
 
   useEffect(() => {
-    // API 이용시
-    // axios
-    //   .get(`/accounts/${accountId}`)
-    //   .then((response) => {
-    //     setUserData(response.data);
-    //   })
-    //   .catch((error) => {
-    //     setError(
-    //       error.response ? error.response.data : "Error fetching user data"
-    //     );
-    //   });
-
-    const user = mockData.users.find((item) => item.accountId === accountId); // 임시로 mockData 사용. 삭제 예정
-    if (user) {
-      setUserData(user);
-    } else {
-      setError({ message: "User not found" });
-    }
+    axios
+      .get(`/accounts/${accountId}`)
+      .then((response) => {
+        setUserData(response.data);
+      })
+      .catch((error) => {
+        setError(
+          error.response
+            ? error.response.data
+            : { message: "Error fetching user data" }
+        );
+      });
   }, [accountId]);
 
   return (
