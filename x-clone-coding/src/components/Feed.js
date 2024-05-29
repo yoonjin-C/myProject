@@ -8,7 +8,6 @@ import mockData from "../mockData.json";
 
 const FeedContainer = styled.div`
   display: block;
-  /* flex-direction: column; */
   flex-grow: 1;
   max-width: 600px;
   width: 100%;
@@ -23,28 +22,29 @@ const FeedContainer = styled.div`
 const Feed = () => {
   const [tweets, setTweets] = useState([]);
   const [error, setError] = useState(null);
-  const accountId = "yjChoi"; //현재 사용자 ID
+  const accountId = "1"; //현재 사용자 ID
 
   useEffect(() => {
-    //API 연결
-    // axios
-    //   .get("/tweets")
-    //   .then((response) => {
-    //     setTweets(response.data.tweets);
-    //   })
-    //   .catch((error) => {
-    //     setError(error.message);
-    //   });
-
-    setTweets(mockData.tweets); //임시로 mockData사용. 삭제예정
+    axios
+      .get("https://api.efubx.o-r.kr/tweets")
+      // .get("/tweets")
+      .then((response) => {
+        setTweets(response.data.tweets);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   }, []);
 
   const addTweet = (newTweet) => {
     setTweets([newTweet, ...tweets]);
   };
+
   const deleteTweet = (tweetId, accountId) => {
     axios
-      .delete(`/tweets/${tweetId}?accountId=${accountId}`)
+      .delete(
+        `https://api.efubx.o-r.kr/tweets/${tweetId}?accountId=${accountId}`
+      )
       .then(() => {
         setTweets(tweets.filter((tweet) => tweet.tweetId !== tweetId));
       })
@@ -57,13 +57,13 @@ const Feed = () => {
         }
       });
   };
+
   return (
     <FeedContainer>
       <FeedHeader />
       <CreatePost addTweet={addTweet} />
       <Timeline
         tweets={tweets}
-        setTweets={setTweets}
         error={error}
         onDelete={deleteTweet}
         accountId={accountId}
