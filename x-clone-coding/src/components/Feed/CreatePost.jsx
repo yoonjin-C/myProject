@@ -7,13 +7,9 @@ import { IoLocationOutline } from "react-icons/io5";
 import { CiCircleList } from "react-icons/ci";
 import { HiOutlineGif } from "react-icons/hi2";
 import { AiOutlinePicture } from "react-icons/ai";
-// import PostOptionButton from './post_option_button';
-// import CreatePostModal from '../../post/create_post_modal';
-// import CreatePostModal from "./CreatePostModal";
 
 const Container = styled.div`
   width: 100%;
-  /* height: 120px; */
   padding-top: 30px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 `;
@@ -54,9 +50,8 @@ const Title = styled.textarea`
   resize: none;
   padding-top: 10px;
   &::placeholder {
-    color: rgba(255, 255, 255, 0.4); /* placeholder 텍스트의 색상 */
+    color: rgba(255, 255, 255, 0.4);
   }
-  /* margin-top: 20px; */
 `;
 
 const Options = styled.div`
@@ -110,12 +105,10 @@ const PublishButton = styled.div`
 `;
 
 export default function CreatePost({ addTweet }) {
-  //   const user = auth.currentUser;
   const [value, setValue] = useState("");
   const [uploading, setUploading] = useState(false);
 
   const onPostButtonClick = async () => {
-    // if (!value && !attachedFile) return;
     if (!value) return;
     if (value.length > 180) {
       alert("Tweets have to be shorter than 180 characters!");
@@ -123,8 +116,9 @@ export default function CreatePost({ addTweet }) {
     }
     setUploading(true);
     try {
-      const response = await axios.post("/tweets", {
-        accountId: "yjChoi", // 유저 아이디 수정 필요
+      const response = await axios.post("https://api.efubx.o-r.kr/tweets", {
+        // const response = await axios.post("/tweets", {
+        accountId: "1",
         content: value,
       });
       setUploading(false);
@@ -142,7 +136,7 @@ export default function CreatePost({ addTweet }) {
     <Container>
       <ContentBox>
         <Header>
-          {<Avatar src="https://via.placeholder.com/40" alt="User Avatar" />}
+          <Avatar src="https://via.placeholder.com/40" alt="User Avatar" />
           <Title
             placeholder="What is happening?!"
             maxLength={280}
@@ -160,10 +154,7 @@ export default function CreatePost({ addTweet }) {
             <LuCalendarClock />
             <IoLocationOutline />
           </IconDiv>
-          <PublishButton
-            onClick={() => onPostButtonClick}
-            disabled={!value.length}
-          >
+          <PublishButton onClick={onPostButtonClick} disabled={!value.length}>
             Post
           </PublishButton>
         </Options>

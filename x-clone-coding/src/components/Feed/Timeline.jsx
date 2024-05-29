@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import styled from "styled-components";
 import Tweet from "./Tweet";
 
@@ -17,20 +16,6 @@ const ErrorMessage = styled.div`
 `;
 
 function Timeline({ tweets, error, onDelete, accountId }) {
-  //   const [tweets, setTweets] = useState([]);
-  //   const [error, setError] = useState(null);
-
-  //   useEffect(() => {
-  //     axios
-  //       .get("/tweets")
-  //       .then((response) => {
-  //         setTweets(response.data.tweets);
-  //       })
-  //       .catch((error) => {
-  //         setError(error.message);
-  //       });
-  //   }, []);
-
   return (
     <TimelineContainer>
       {error && <ErrorMessage>{error}</ErrorMessage>}

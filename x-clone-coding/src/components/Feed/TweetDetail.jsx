@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-import mockData from "../../mockData.json";
 import Header from "../Header";
 
 const DetailContainer = styled.div`
@@ -85,25 +84,20 @@ const Text = styled.p`
   font-weight: 400;
   text-decoration: none;
 `;
+
 const TweetDetail = () => {
   const { tweetId } = useParams();
   const [tweet, setTweet] = useState(null);
 
   useEffect(() => {
-    //API사용시 다음 코드 사용
-    // axios
-    //   .get(`/tweets/${tweetId}`)
-    //   .then((response) => {
-    //     setTweet(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching tweet details:", error);
-    //   });
-
-    //임시로 API대신 mockData사용.
-    setTweet(
-      mockData.tweets.find((item) => item.tweetId === parseInt(tweetId))
-    );
+    axios
+      .get(`/tweets/${tweetId}`)
+      .then((response) => {
+        setTweet(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tweet details:", error);
+      });
   }, [tweetId]);
 
   if (!tweet) return <DetailContainer>Loading...</DetailContainer>;
@@ -113,7 +107,6 @@ const TweetDetail = () => {
       <Header />
       <FeedContainer>
         <TweetBlock>
-          {" "}
           <h4>{tweet.writer}</h4>
           <p>{tweet.content}</p>
           <p>{new Date(tweet.postDate).toLocaleString()}</p>
