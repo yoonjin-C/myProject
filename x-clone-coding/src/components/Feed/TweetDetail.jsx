@@ -91,7 +91,7 @@ const TweetDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`/tweets/${tweetId}`)
+      .get(`${process.env.REACT_APP_SERVER_URL}/tweets/${tweetId}`)
       .then((response) => {
         setTweet(response.data);
       })

@@ -31,7 +31,7 @@ const MainProfile = () => {
 
   useEffect(() => {
     axios
-      .get(`https://api.efubx.o-r.kr/accounts/${accountId}`)
+      .get(`${process.env.REACT_APP_SERVER_URL}/accounts/${accountId}`)
       .then((response) => {
         setUserData(response.data);
       })

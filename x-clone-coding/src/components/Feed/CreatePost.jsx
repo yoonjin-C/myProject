@@ -7,6 +7,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { CiCircleList } from "react-icons/ci";
 import { HiOutlineGif } from "react-icons/hi2";
 import { AiOutlinePicture } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -107,6 +108,7 @@ const PublishButton = styled.div`
 export default function CreatePost({ addTweet }) {
   const [value, setValue] = useState("");
   const [uploading, setUploading] = useState(false);
+  const navigate = useNavigate();
 
   const onPostButtonClick = async () => {
     if (!value) return;
@@ -116,14 +118,19 @@ export default function CreatePost({ addTweet }) {
     }
     setUploading(true);
     try {
-      const response = await axios.post("https://api.efubx.o-r.kr/tweets", {
-        // const response = await axios.post("/tweets", {
-        accountId: "1",
-        content: value,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/tweets`,
+        {
+          // const response = await axios.post("/tweets", {
+          accountId: "1",
+          content: value,
+        }
+      );
       setUploading(false);
       alert("Posted!");
       addTweet(response.data.tweet);
+      navigate("/");
+      window.location.reload();
       setValue("");
     } catch (error) {
       setUploading(false);

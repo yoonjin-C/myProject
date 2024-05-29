@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { FaCircleXmark } from "react-icons/fa6";
-import styled, { withTheme } from "styled-components";
+import styled from "styled-components";
 
 const FeedHeaderDiv = styled.div`
   display: flex;
@@ -29,34 +28,27 @@ const Container = styled.div`
   }
 `;
 
+const StyledDiv = styled.div`
+  padding: 15px;
+  border-bottom: ${(props) => (props.selected ? "4px" : "0")} solid
+    ${(props) => (props.selected ? "twitter.500" : "rgba(255, 255, 255, 0)")};
+  color: ${(props) => (props.selected ? "white" : "rgba(255, 255, 255, 0.4)")};
+`;
+
 function FeedHeader() {
   const [recommend, setRecommend] = useState(true);
 
   const handleClick = () => {
-    recommend ? setRecommend(false) : setRecommend(true);
+    setRecommend(!recommend);
   };
 
   return (
     <FeedHeaderDiv>
       <Container onClick={handleClick}>
-        <div
-          p="15px"
-          borderBottom="4px"
-          borderColor={recommend ? "twitter.500" : "rgba(255, 255, 255, 0)"}
-          color={recommend ? "white" : "rgba(255, 255, 255, 0.4)"}
-        >
-          For you
-        </div>
+        <StyledDiv selected={recommend}>For you</StyledDiv>
       </Container>
       <Container onClick={handleClick}>
-        <div
-          p="15px"
-          borderBottom="4px"
-          borderColor={!recommend ? "twitter.500" : "rgba(255, 255, 255, 0)"}
-          color={!recommend ? "white" : "rgba(255, 255, 255, 0.4)"}
-        >
-          Following
-        </div>
+        <StyledDiv selected={!recommend}>Following</StyledDiv>
       </Container>
     </FeedHeaderDiv>
   );

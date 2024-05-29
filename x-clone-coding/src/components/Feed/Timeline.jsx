@@ -15,21 +15,35 @@ const ErrorMessage = styled.div`
   font-weight: bold;
 `;
 
+const LoadingMessage = styled.div`
+  color: white;
+  font-weight: bold;
+`;
+
 function Timeline({ tweets, error, onDelete, accountId }) {
   return (
     <TimelineContainer>
       {error && <ErrorMessage>{error}</ErrorMessage>}
-      {tweets.map((tweet) => (
-        <Tweet
-          key={tweet.tweetId}
-          tweetId={tweet.tweetId}
-          accountId={accountId}
-          writer={tweet.writer}
-          content={tweet.content}
-          postDate={new Date(tweet.postDate).toLocaleString()}
-          onDelete={onDelete}
-        />
-      ))}
+      {!tweets.length ? (
+        <LoadingMessage>Loading...</LoadingMessage>
+      ) : (
+        tweets.map((tweet, index) =>
+          tweet && tweet.tweetId ? (
+            <Tweet
+              key={tweet.tweetId}
+              tweetId={tweet.tweetId}
+              accountId={accountId}
+              writer={tweet.writer}
+              content={tweet.content}
+              postDate={new Date(tweet.postDate).toLocaleString()}
+              onDelete={onDelete}
+            />
+          ) : (
+            // <ErrorMessage key={index}>Invalid tweet data</ErrorMessage>
+            <ErrorMessage key={index}></ErrorMessage>
+          )
+        )
+      )}
     </TimelineContainer>
   );
 }

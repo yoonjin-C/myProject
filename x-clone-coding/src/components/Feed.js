@@ -26,7 +26,7 @@ const Feed = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.efubx.o-r.kr/tweets")
+      .get(`${process.env.REACT_APP_SERVER_URL}/tweets`)
       // .get("/tweets")
       .then((response) => {
         setTweets(response.data.tweets);
@@ -43,7 +43,7 @@ const Feed = () => {
   const deleteTweet = (tweetId, accountId) => {
     axios
       .delete(
-        `https://api.efubx.o-r.kr/tweets/${tweetId}?accountId=${accountId}`
+        `${process.env.REACT_APP_SERVER_URL}/tweets/${tweetId}?accountId=${accountId}`
       )
       .then(() => {
         setTweets(tweets.filter((tweet) => tweet.tweetId !== tweetId));

@@ -6,15 +6,13 @@ import TweetDetail from "./components/Feed/TweetDetail";
 import ProfilePage from "./pages/ProfilePage";
 function App() {
   return (
-    <>
-      <body>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/tweets/:tweetId" element={<TweetDetail />} />
-        </Routes>
-      </body>
-    </>
+    <div className="main">
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/tweets/:tweetId" element={<TweetDetail />} />
+      </Routes>
+    </div>
   );
 }
 
