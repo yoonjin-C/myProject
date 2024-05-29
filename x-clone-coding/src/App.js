@@ -8,13 +8,11 @@ function App() {
   return (
     <>
       <body>
-        <Router>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/tweets/:tweetId" element={<TweetDetail />} />
-          </Routes>
-        </Router>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/tweets/:tweetId" element={<TweetDetail />} />
+        </Routes>
       </body>
     </>
   );
