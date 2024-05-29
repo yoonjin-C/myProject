@@ -1,5 +1,6 @@
-import { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const ProfileHeaderDiv = styled.div`
   display: flex;
@@ -18,12 +19,41 @@ const ProfileHeaderDiv = styled.div`
 const User = styled.div`
   font-size: 20px;
   font-weight: 700;
+`;
+
+const ArrowDiv = styled.div`
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
   margin-left: 20px;
+`;
+
+const NavItemLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+
+  &:visited {
+    color: white;
+  }
+
+  &:hover {
+    color: white;
+  }
+
+  &:active {
+    color: white;
+  }
 `;
 
 function ProfileHeader({ userData }) {
   return (
     <ProfileHeaderDiv>
+      <NavItemLink to={`/..`}>
+        <ArrowDiv>
+          <FaArrowLeft />
+        </ArrowDiv>
+      </NavItemLink>
       <User>{userData.name}</User>
     </ProfileHeaderDiv>
   );

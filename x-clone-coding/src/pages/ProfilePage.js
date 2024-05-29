@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
-import axios from "axios";
-import ProfileHeader from "../Profile/ProfileHeader";
 import MainProfile from "../Profile/MainProfile";
 
 const ProfileContainer = styled.div`
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: row;
   overflow: auto scroll;
+  background-color: black;
+  /* padding-left: 300px; */
 `;
 
 function ProfilePage() {
