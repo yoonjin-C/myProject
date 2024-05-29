@@ -8,23 +8,29 @@ const TweetBlock = styled.div`
   width: 600px;
   flex-direction: column;
   align-items: flex-start;
-  //padding: 15px 5px 0px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   justify-content: center;
 `;
+
 const TweetBlock2 = styled.div`
   display: flex;
-  width: 600px;
+  width: 580px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 10px;
+  margin: 10px;
 `;
 
 const TweetInfo = styled.div`
   display: flex;
   flex-direction: row;
-  //justify-content: flex-start;
+  height: 20px;
+  width: 580px;
+  justify-content: space-between;
+`;
+const WriterInfo = styled.div`
+  display: flex;
+  flex-direction: row;
   height: 20px;
   justify-content: space-between;
 `;
@@ -46,10 +52,13 @@ const PostDate = styled.div`
 `;
 
 const ContentBlock = styled.div`
-  width: 600px;
+  width: 580px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+`;
+
+const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
@@ -59,7 +68,6 @@ const Text = styled.p`
   line-height: 20px;
   font-size: 15px;
   font-weight: 400;
-  text-decoration: none;
 `;
 
 const DeleteBtn = styled.button`
@@ -76,6 +84,7 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
+
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -91,8 +100,38 @@ const ModalContent = styled.div`
   align-items: center;
 `;
 
-const ModalButton = styled.button`
+const DeleteInfo = styled.div`
+  color: #7f8082;
+  margin-bottom: 15px;
+`;
+
+const BtnDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+const ModalDelButton = styled.button`
   margin: 5px;
+  width: 250px;
+  height: 45px;
+  background-color: red;
+  color: white;
+  border: 0.5px solid red;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+`;
+const ModalCancelButton = styled.button`
+  margin: 5px;
+  width: 250px;
+  height: 45px;
+  background-color: rgba(0, 0, 0, 1);
+  color: white;
+  border: 0.5px solid white;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
 `;
 
 function Tweet({ tweetId, writer, content, postDate, onDelete, accountId }) {
@@ -115,24 +154,37 @@ function Tweet({ tweetId, writer, content, postDate, onDelete, accountId }) {
     <TweetBlock>
       <TweetBlock2>
         <TweetInfo>
-          <Writer>{writer}</Writer>
-          <PostDate>{postDate}</PostDate>
+          <WriterInfo>
+            <Writer>{writer}</Writer>
+            <PostDate>{postDate}</PostDate>
+          </WriterInfo>
           <DeleteBtn onClick={handleDeleteClick}>x</DeleteBtn>
         </TweetInfo>
         <ContentBlock>
-          <Link to={`/tweets/${tweetId}`}>
+          <StyledLink to={`/tweets/${tweetId}`}>
             <Text>{content}</Text>
             {/* 사진이 들어온다면 여기 */}
-          </Link>
+          </StyledLink>
         </ContentBlock>
         {isModalOpen && (
           <ModalOverlay>
             <ModalContent>
               <p>Delete Post?</p>
-              <div>
-                <ModalButton onClick={handleDeleteConfirm}>Delete</ModalButton>
-                <ModalButton onClick={handleCancel}>Cancel</ModalButton>
-              </div>
+              <DeleteInfo>
+                This can’t be undone and it will be
+                <br />
+                removed from your profile, the <br />
+                timeline of any accounts that follow <br />
+                you, and from search results.
+              </DeleteInfo>
+              <BtnDiv>
+                <ModalDelButton onClick={handleDeleteConfirm}>
+                  Delete
+                </ModalDelButton>
+                <ModalCancelButton onClick={handleCancel}>
+                  Cancel
+                </ModalCancelButton>
+              </BtnDiv>
             </ModalContent>
           </ModalOverlay>
         )}

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { RiHome7Fill } from "react-icons/ri";
 import { BiSearch } from "react-icons/bi";
 import { GoBell } from "react-icons/go";
@@ -10,16 +9,17 @@ import { FaRegUser } from "react-icons/fa6";
 import { HiOutlineDotsCircleHorizontal } from "react-icons/hi";
 
 const HeaderContainer = styled.div`
-  /* position:fixed; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 305px;
+  width: 294px;
   height: 100%;
   padding-left: 8px;
   padding-right: 8px;
   align-items: flex-start;
   background-color: black;
+  position: fixed;
+  left: 0;
 `;
 
 const Nav = styled.nav`
@@ -30,11 +30,6 @@ const Nav = styled.nav`
   color: white;
 `;
 
-const Logo = styled.h1`
-  color: rgba(231, 233, 234, 1);
-  text-decoration: none;
-  font-size: 2rem;
-`;
 const NavItem = styled.div`
   color: rgba(231, 233, 234, 1);
   text-decoration: none;
@@ -45,6 +40,11 @@ const NavItem = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+const NavItemLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const NavItemLogo = styled.div`
   color: rgba(231, 233, 234, 1);
   font-size: 2rem;
@@ -55,15 +55,17 @@ const NavItemLogo = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 const NavItemText = styled.div`
   color: rgba(231, 233, 234, 1);
   text-overflow: unset;
   font-size: 20px;
-  font-weight: 700px;
+  font-weight: 700;
   white-space: nowrap;
   margin-left: 20px;
   text-align: inherit;
   line-height: 24px;
+  text-decoration: none;
 `;
 
 const Header = () => {
@@ -71,17 +73,17 @@ const Header = () => {
     <HeaderContainer>
       <Nav>
         <NavItem>
-          <Link to={`/`}>
+          <NavItemLink to={`/`}>
             <NavItemLogo> 𝕏 </NavItemLogo>
-          </Link>
+          </NavItemLink>
         </NavItem>
         <NavItem>
           <NavItemLogo>
             <RiHome7Fill />
           </NavItemLogo>
-          <Link to={`/`}>
+          <NavItemLink to={`/`}>
             <NavItemText>Home</NavItemText>
-          </Link>
+          </NavItemLink>
         </NavItem>
         <NavItem>
           <NavItemLogo>
@@ -105,9 +107,9 @@ const Header = () => {
           <NavItemLogo>
             <FaRegUser />
           </NavItemLogo>
-          <Link to={`/profile`}>
+          <NavItemLink to={`/profile`}>
             <NavItemText>Profile</NavItemText>
-          </Link>
+          </NavItemLink>
         </NavItem>
         <NavItem>
           <NavItemLogo>

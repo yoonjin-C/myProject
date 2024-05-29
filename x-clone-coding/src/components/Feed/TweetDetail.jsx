@@ -3,51 +3,51 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import Header from "../Header";
+import DetailHeader from "./DetailHeader";
 
 const DetailContainer = styled.div`
-  height: 100%;
+  height: 100vh; /* 전체 높이를 채우도록 설정 */
   display: flex;
   flex-direction: row;
-  overflow: auto scroll;
+  overflow: auto;
   color: white;
+  background-color: black;
 `;
+
 const FeedContainer = styled.div`
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column; /* 수직 정렬을 위해 변경 */
   flex-grow: 1;
   max-width: 600px;
   width: 100%;
-
-  margin-left: 0px;
-  margin-right: 0px;
-  border-left-width: 1px;
-  border-right-width: 1px;
-  border-color: rgb(47, 51, 54);
-  border-style: solid;
+  margin: 0 auto; /* 중앙 정렬 */
+  border-left: 1px solid rgb(47, 51, 54);
+  border-right: 1px solid rgb(47, 51, 54);
   color: white;
+  padding-top: 60px;
+  margin-left: 310px;
 `;
+
 const TweetBlock = styled.div`
   display: flex;
-  width: 600px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  //padding: 15px 5px 0px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   justify-content: center;
 `;
 const TweetBlock2 = styled.div`
   display: flex;
-  width: 600px;
+  width: 580px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 10px;
+  margin: 10px;
 `;
 
 const TweetInfo = styled.div`
   display: flex;
   flex-direction: row;
-  //justify-content: flex-start;
   height: 20px;
   justify-content: space-between;
 `;
@@ -65,11 +65,15 @@ const PostDate = styled.div`
   font-size: 15px;
   white-space: nowrap;
   align-items: center;
-  margin-left: 20px;
 `;
-
+const WriterInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  justify-content: space-between;
+`;
 const ContentBlock = styled.div`
-  width: 600px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -106,11 +110,20 @@ const TweetDetail = () => {
     <DetailContainer>
       <Header />
       <FeedContainer>
+        <DetailHeader />
         <TweetBlock>
-          <h4>{tweet.writer}</h4>
-          <p>{tweet.content}</p>
-          <p>{new Date(tweet.postDate).toLocaleString()}</p>
-          {/* Add more tweet details as needed */}
+          <TweetBlock2>
+            <TweetInfo>
+              <WriterInfo>
+                <Writer>{tweet.writer}</Writer>
+              </WriterInfo>
+            </TweetInfo>
+            <ContentBlock>
+              <Text>{tweet.content}</Text>
+              {/* 사진이 들어온다면 여기 */}
+              <PostDate>{new Date(tweet.postDate).toLocaleString()}</PostDate>
+            </ContentBlock>
+          </TweetBlock2>
         </TweetBlock>
       </FeedContainer>
     </DetailContainer>

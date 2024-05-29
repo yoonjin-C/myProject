@@ -1,17 +1,17 @@
+// Feed.js
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FeedHeader from "./Feed/FeedHeader";
 import CreatePost from "./Feed/CreatePost";
 import Timeline from "./Feed/Timeline";
 import axios from "axios";
-import mockData from "../mockData.json";
 
 const FeedContainer = styled.div`
   display: block;
   flex-grow: 1;
   max-width: 600px;
   width: 100%;
-  margin-left: 0px;
+  margin-left: 310px;
   margin-right: 0px;
   border-left-width: 1px;
   border-right-width: 1px;
@@ -27,9 +27,11 @@ const Feed = () => {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/tweets`)
-      // .get("/tweets")
       .then((response) => {
-        setTweets(response.data.tweets);
+        const sortedTweets = response.data.tweets.sort(
+          (a, b) => new Date(b.postDate) - new Date(a.postDate)
+        );
+        setTweets(sortedTweets);
       })
       .catch((error) => {
         setError(error.message);

@@ -16,9 +16,9 @@ const Container = styled.div`
 `;
 
 const ContentBox = styled.div`
-  width: 100%;
+  width: calc(100% - 20px); // 전체 너비에서 마진을 뺀 너비 설정
   height: 100%;
-  padding-left: 20px;
+  margin-left: 20px;
   padding-top: 30px;
 `;
 
@@ -60,6 +60,15 @@ const Options = styled.div`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  height: 56px;
+  margin-right: 30px;
+`;
+
+const OptionDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 85%;
   height: 56px;
 `;
 
@@ -152,15 +161,17 @@ export default function CreatePost({ addTweet }) {
           ></Title>
         </Header>
         <Options>
-          <OptionWrapper></OptionWrapper>
-          <IconDiv>
-            <AiOutlinePicture />
-            <HiOutlineGif />
-            <CiCircleList />
-            <BsEmojiSmile />
-            <LuCalendarClock />
-            <IoLocationOutline />
-          </IconDiv>
+          <OptionDiv>
+            <OptionWrapper></OptionWrapper>
+            <IconDiv>
+              <AiOutlinePicture />
+              <HiOutlineGif />
+              <CiCircleList />
+              <BsEmojiSmile />
+              <LuCalendarClock />
+              <IoLocationOutline />
+            </IconDiv>
+          </OptionDiv>
           <PublishButton onClick={onPostButtonClick} disabled={!value.length}>
             Post
           </PublishButton>
