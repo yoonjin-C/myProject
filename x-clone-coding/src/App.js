@@ -1,7 +1,6 @@
 import "./App.css";
 import MainPage from "./pages/MainPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Feed from "./components/Feed";
 import TweetDetail from "./components/Feed/TweetDetail";
 import ProfilePage from "./pages/ProfilePage";
 function App() {
