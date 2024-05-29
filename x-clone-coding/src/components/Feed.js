@@ -1,10 +1,10 @@
-// Feed.js
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FeedHeader from "./Feed/FeedHeader";
 import CreatePost from "./Feed/CreatePost";
 import Timeline from "./Feed/Timeline";
 import axios from "axios";
+import mockData from "../mockData.json";
 
 const FeedContainer = styled.div`
   display: block;
@@ -27,11 +27,9 @@ const Feed = () => {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/tweets`)
+      // .get("/tweets")
       .then((response) => {
-        const sortedTweets = response.data.tweets.sort(
-          (a, b) => new Date(b.postDate) - new Date(a.postDate)
-        );
-        setTweets(sortedTweets);
+        setTweets(response.data.tweets);
       })
       .catch((error) => {
         setError(error.message);
