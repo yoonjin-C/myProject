@@ -28,19 +28,13 @@ const Feed = () => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/tweets`)
       .then((response) => {
-        if (response.data && response.data.tweets) {
-          const sortedTweets = response.data.tweets.sort(
-            (a, b) => new Date(b.postDate) - new Date(a.postDate)
-          );
-          setTweets(sortedTweets);
-        } else {
-          throw new Error("Invalid response data format");
-        }
+        const sortedTweets = response.data.tweets.sort(
+          (a, b) => new Date(b.postDate) - new Date(a.postDate)
+        );
+        setTweets(sortedTweets);
       })
       .catch((error) => {
         setError(error.message);
-        console.error("Error fetching tweets:", error);
-        alert("Failed to fetch tweets. Please try again later.");
       });
   }, []);
 
