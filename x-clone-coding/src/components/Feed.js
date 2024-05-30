@@ -28,12 +28,14 @@ const Feed = () => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/tweets`)
       .then((response) => {
+        console.log("Response data: ", response.data);
         const sortedTweets = response.data.tweets.sort(
           (a, b) => new Date(b.postDate) - new Date(a.postDate)
         );
         setTweets(sortedTweets);
       })
       .catch((error) => {
+        console.error(error);
         setError(error.message);
       });
   }, []);
